@@ -1,0 +1,9 @@
+---
+- name: Set mirror for apt
+  ansible.builtin.template:
+    src: "sources.list.j2"
+    dest: "/etc/apt/sources.list"
+    backup: true
+  when: change_mirror | bool
+
+

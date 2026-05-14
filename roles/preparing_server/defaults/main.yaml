@@ -1,0 +1,14 @@
+---
+# mirror task variables:
+
+change_mirror: true
+default_repo: false
+
+main_mirror: "https://repo.mecan.ir/repository"
+sec_mirror:  "https://repo.mecan.ir/repository"
+
+debian_main_repo: "https://deb.debian.org/"
+debian_sec_repo:  "https://security.debian.org/"
+ubuntu_main_repo: "http://archive.ubuntu.com/ubuntu/"
+ubutnu_sec_repo:  "http://security.ubuntu.com/ubuntu/"
+

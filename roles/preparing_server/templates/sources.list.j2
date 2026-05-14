@@ -1,0 +1,33 @@
+# Managed By Ansible
+# Don't change it!
+
+{% if not change_mirror | bool %}
+# Mirror change disabled - preserving original sources.list
+{% else %}
+  {% if not default_repo | bool %}
+    {% set mirror_base = main_mirror %}
+    {% set mirror_sec = sec_mirror %}
+  {% else %}
+    {% if ansible_distribution == 'Debian' %}
+      {% set mirror_base = debian_main_repo %}
+      {% set mirror_sec = debian_sec_repo %}
+    {% else %}
+      {% set mirror_base = ubuntu_main_repo %}
+      {% set mirror_sec = ubuntu_sec_repo %}
+    {% endif %}
+  {% endif %}
+
+  {% if ansible_distribution == "Debian" %}
+  deb {{ mirror_base }}/debian/ {{ ansible_distribution_release }} contrib main non-free non-free-firmware
+  deb {{ mirror_base }}/debian/ {{ ansible_distribution_release }}-updates contrib main non-free non-free-firmware
+  deb {{ mirror_base }}/debian/ {{ ansible_distribution_release }}-backports contrib main non-free non-free-firmware
+  deb {{ mirror_base }}/debian/ {{ ansible_distribution_release }}-proposed-updates contrib main non-free non-free-firmware
+  deb {{ mirror_sec }}/debian-security/ {{ ansible_distribution_release }}-security contrib main non-free non-free-firmware
+
+  {% elif ansible_distribution == "Ubuntu" %}
+  deb {{ mirror_base }}/ubuntu/ {{ ansible_distribution_release }} main restricted universe multiverse
+  deb {{ mirror_base }}/ubuntu/ {{ ansible_distribution_release }}-updates main restricted universe multiverse
+  deb {{ mirror_base }}/ubuntu/ {{ ansible_distribution_release }}-backports main restricted universe multiverse
+  deb {{ mirror_sec }}/ubuntu-security/ {{ ansible_distribution_release }}-security main restricted universe multiverse
+  {% endif %}
+{% endif %}

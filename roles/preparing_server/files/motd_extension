@@ -1,0 +1,12 @@
+#!/bin/bash
+
+# Get disk usage for the root partition
+ROOT_USAGE=$(df -h / | awk 'NR==2 {print $5}')
+# Get number of active packages needing updates
+UPDATES=$(apt list --upgradable 2>/dev/null | grep -c upgradable)
+
+echo "--------------------------------------------------------"
+echo "  System Status Report"
+echo "  - Disk Usage (/): $ROOT_USAGE"
+echo "  - Pending Package Updates: $UPDATES"
+echo "--------------------------------------------------------"
