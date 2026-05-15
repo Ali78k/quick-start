@@ -10,10 +10,21 @@ quick-start
 │   ├── host.yaml
 │   └── group_vars
 │       └── all
+│           ├── docker.yaml
 │           └── preparing.yaml
 ├── playbooks
 │   └── preparing.yaml
 └── roles
+    ├── docker
+    │   ├── handlers
+    │   │   └── main.yaml
+    │   ├── tasks
+    │   │   ├── configure_docker.yaml
+    │   │   ├── install_docker.yaml
+    │   │   ├── main.yaml
+    │   │   └── post_installation.yaml
+    │   └── templates
+    │       └── docker-service.j2
     └── preparing_server
         ├── defaults
         │   └── main.yaml
@@ -59,6 +70,7 @@ To run the playbook, check the `inventory/host.yaml` and variables under `invent
 Run the playbook:
 ```bash
 ansible-playbook -i inventory/host.yaml playbooks/preparing.yaml
+ansible-playbook -i inventory/host.yaml playbooks/preparing.yaml --tags docker
 ```
 
 

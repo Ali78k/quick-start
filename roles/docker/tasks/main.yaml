@@ -1,0 +1,17 @@
+# Partly adapted from: https://github.com/AhmadRafiee/DevOps_Certification
+# License: Apache-2.0
+---
+- name: install docker
+  import_tasks: install_docker.yaml
+  tags: install_docker
+  when: ansible_os_family == "Debian"
+
+- name: config docker
+  import_tasks: configure_docker.yaml
+  tags: config_docker
+  when: ansible_os_family == "Debian"
+
+- name: docker post installation
+  import_tasks: post_installation.yaml
+  tags: docker_post_intallation
+  when: ansible_os_family == "Debian"

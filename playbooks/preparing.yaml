@@ -5,3 +5,5 @@
   roles:
     - role: preparing_server
       tags: preparing_server
+    - role: docker
+      tags: docker

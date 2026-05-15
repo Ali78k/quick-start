@@ -1,0 +1,24 @@
+# http proxy
+http_proxy: http://11.22.33.44:7080
+
+# docker configuration variables
+docker:
+  #http_proxy: "{{ http_proxy }}"
+  no_proxy: localhost,127.0.0.1,hub.hamdocker.ir
+  log_max_file: "5"
+  log_max_size: 100m
+  registry_mirror: https://hub.hamdocker.ir
+
+# docker-ce installation
+docker_ce:
+  use_mirror: true
+  deb_file: https://download.docker.com/linux/debian
+  gpg_key: https://download.docker.com/linux/debian/gpg
+  deb_file_mirror: https://archive.ito.gov.ir/docker-ce/linux/debian
+  gpg_key_mirror: https://archive.ito.gov.ir/docker-ce/linux/debian/gpg
+
+# docker-ce post-installation
+
+post_installation:
+  add_user: true
+  docker_user: user

@@ -1,0 +1,9 @@
+- name: Add user to docker group
+  ansible.builtin.user:
+    name: "{{ post_installation.docker_user | default(ansible_user_id) }}"
+    groups: docker
+    append: true
+  when:
+    - post_installation.add_user | bool
+    - post_installation.docker_user | default(ansible_user_id) != "root"
+  notify: restart docker
